@@ -1,41 +1,3 @@
-
-<?php
-
-
-require_once "dbconnect.php";
-
-  error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-  if(isset($_POST['search'])) {
-    $search = $_POST['search'];
-    $search = preg_replace("#[^0-9a-z]i#","", $search);
-    $res=mysqli_query($connect, "SELECT * FROM restaurant WHERE rName LIKE '%".$search."%'");
-  $row=mysqli_fetch_array($res, MYSQLI_ASSOC);
-  $count = mysqli_num_rows($res);
-
-   
-    
-    if($count == 0){
-      $output = "There was no search results!";
-
-    }else{
-
-      while ($row = mysqli_fetch_array($res)) {
-
-        $rname = $row ['rName'];
-        $address = $row ['address'];
-        $tel = $row ['tel'];
-         
-
-       $count.= '<div> '.$rname.' '.$address.''.$tel.'</div>';
-
-      }
-
-    }
-  }
-
-  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,12 +11,19 @@ ini_set('display_errors', 1);
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 <link rel="stylesheet" href="style.css">
+<style>
+  #jumbo{
+    background-image: url('img/concert.jpg');
+    background-size: cover;
+    height: 400px;
+}
+</style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg lead">
     <div class="container">
-        <a class="navbar-brand" href="index.php">Get your Guide</a>
+        <a class="navbar-brand" href="index.html">Get your Guide</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -62,13 +31,13 @@ ini_set('display_errors', 1);
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="sightseeing.php">Sightseeing <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="events.php">Concerts</a>
+                    <a class="nav-link" href="concerts.php">Concerts</a>
                 </li>
                 
                 <li class="nav-item active">
@@ -76,28 +45,15 @@ ini_set('display_errors', 1);
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-md-0">
-                <div class="input-group input-group-md">
-                    <input type="text" class="form-control" aria-label="md" aria-describedby="inputGroup-sizing-md" placeholder="Search..." name="search">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-danger btn-md ml-6">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <a class="btn btn-danger btn-md ml-3" href="login.php"><i class="fa fa-user"></i>
-                   Login/Register
-                   
-                </a>
-            </form>
+            
         </div>
     </div>
 </nav>
 <section class="jumbotron text-center" id="jumbo">
     <div class="container">
        
-        <h1 class="jumbotron-heading">Vienna  Tours  </h1>
-        <p class="lead ">Popular Tours in Vienna !</p>
+        <h1 class="jumbotron-heading">Concerts in Vienna  </h1>
+        <p class="lead">Popular Tours in Vienna !</p>
     </div>
 </section>
 <div class="container">
@@ -120,25 +76,8 @@ ini_set('display_errors', 1);
     <div class="thumbnail">
       <img src="img/karkskirche.jpg" alt="karlskirche" >
       <div class="caption">
-         <?php
-     
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='St. Charles Church'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
-                        
-                   ;
-               }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
-           ?>
+        <h3>Thumbnail label</h3>
+        <p>...</p>
         
       </div>
     </div>
@@ -147,26 +86,8 @@ ini_set('display_errors', 1);
     <div class="thumbnail">
       <img src="img/kursalon.jpg" alt="kursalon">
       <div class="caption">
-       
-         <?php
-     
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='Kusolon'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
-                        
-                   ;
-               }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
-           ?>
+        <h3>Thumbnail label</h3>
+        <p>...</p>
         
       </div>
     </div>
@@ -175,53 +96,20 @@ ini_set('display_errors', 1);
     <div class="thumbnail">
       <img src="img/stannachurch.jpg" alt="st.Anna church" >
       <div class="caption">
-       <?php
-     
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='St.Anna church'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
-                        
-                   ;
-               }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
-           ?>
+        <h3>Thumbnail label</h3>
+        <p>...</p>
+        
       </div>
     </div>
   </div>
-</div><br><br>
+</div>
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <img src="img/shonbrunn.jpg" alt="shonbrunn">
       <div class="caption">
-       <?php
-     
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='St.Anna church'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
-                        
-                   ;
-               }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
-           ?>
+        <h3>Thumbnail label</h3>
+        <p>...</p>
         
       </div>
     </div>
@@ -230,26 +118,8 @@ ini_set('display_errors', 1);
     <div class="thumbnail">
       <img src="img/segway.jpg" alt="segway">
       <div class="caption">
-       <?php
-     
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='segway'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h2>".$row['sName']. "</h2>"
-                       ."<div class='list'>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"."</div>"
-                        
-                   ;
-               }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
-           ?>
+        <h3>Thumbnail label</h3>
+        <p>...</p>
         
       </div>
     </div>
@@ -258,30 +128,46 @@ ini_set('display_errors', 1);
     <div class="thumbnail">
       <img src="img/schloss.jpg" alt="schloss">
       <div class="caption">
-       <?php
-     
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='schloss schonburn'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
-                        
-                   ;
-               }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
-           ?>
+        <h3>Thumbnail label</h3>
+        <p>...</p>
+        
       </div>
     </div>
   </div>
 </div><br>
-
+<nav  aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <h2>Some restaurants in Vienna.
+                   </h2>
+                </ol>
+            </nav>
+            <!--cards here-->
+            <div class="card-deck">
+  <div class="card">
+    <img src="img/lemon.png" class="card-img-top" alt="lemonrestaurent">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="img/sixta.png" class="card-img-top" alt="sixta restaurant">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card">
+    <img src="img/burjalarab.jpg" class="card-img-top" alt="burjalrab">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+</div><br>
   <!-- concerts beginns here-->
   <nav  aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -295,8 +181,7 @@ ini_set('display_errors', 1);
     <img src="img/lemon.png" class="card-img-top" alt="lemonrestaurent">
     <div class="card-body">
      <?php
-    
-
+     require_once'dbconnect.php';
            $sql = "SELECT * FROM `restaurant` WHERE tel=015812308";
            $result = $connect->query($sql);
 
@@ -304,7 +189,7 @@ ini_set('display_errors', 1);
                $row = $result->fetch_assoc();
                    echo 
                        "<h3>".$row['rName']. "</h3>"
-                        ."<li >".$row['address']."</li>"
+                        ."<li>".$row['address']."</li>"
                        ."<li>".$row['descript']."</li>"
                         ."<li>".$row['tel']."</li>"
                         ."<li>".$row['webaddress']."</li>"
@@ -321,7 +206,7 @@ ini_set('display_errors', 1);
     <img src="img/sixta.png" class="card-img-top" alt="sixta restaurant">
     <div class="card-body">
       <?php
-     
+     require_once'dbconnect.php';
            $sql = "SELECT * FROM `restaurant` WHERE rname='sixta'";
            $result = $connect->query($sql);
 
@@ -335,7 +220,9 @@ ini_set('display_errors', 1);
                         ."<li>".$row['webaddress']."</li>"
                    ;
                }
-           
+            else {
+               echo "<h2>No Data Avaliable</h2>";
+           }
            ?>
     </div>
   </div>
@@ -375,66 +262,24 @@ ini_set('display_errors', 1);
   <div class="card">
     <img src="img/kristof.jpg" class="card-img-top" alt="kristof">
     <div class="card-body">
-      <?php
-     
-           $sql = "SELECT * FROM `concerts` WHERE cname='Kris Kristofferson'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h3>".$row['cName']. "</h3>"
-                        ."<li>".$row['address']."</li>"
-                       ."<li>".$row['event']."</li>"
-                        ."<li>".$row['descript']."</li>"
-                        ."<li>".$row['preis']."</li>"
-                   ;
-           }
-           ?> 
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
   <div class="card">
     <img src="img/concert.jpg" class="card-img-top" alt="amsterdam sumer concerts">
     <div class="card-body">
-       <?php
-     
-           $sql = "SELECT * FROM `concerts` WHERE cname='Cebouw'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h3>".$row['cName']. "</h3>"
-                        ."<li>".$row['address']."</li>"
-                       ."<li>".$row['event']."</li>"
-                        ."<li>".$row['descript']."</li>"
-                        ."<li>".$row['preis']."</li>"
-                   ;
-           }
-           ?> 
-           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
   <div class="card">
     <img src="img/lenny.jpg" class="card-img-top" alt="lenny live music">
     <div class="card-body">
-       <?php
-     
-           $sql = "SELECT * FROM `concerts` WHERE cname='Lenny Kravitz'";
-           $result = $connect->query($sql);
-
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h3>".$row['cName']. "</h3>"
-                        ."<li>".$row['address']."</li>"
-                       ."<li>".$row['event']."</li>"
-                        ."<li>".$row['descript']."</li>"
-                        ."<li>".$row['preis']."</li>"
-                   ;
-           }
-           ?>
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
@@ -463,7 +308,7 @@ ini_set('display_errors', 1);
                 <ul class="list-unstyled">
                     <li><a href="index.php">Home</a></li>
                     <li><a href="restaurents.php">Restaurant</a></li>
-                    <li><a href="events.php">Concern</a></li>
+                    <li><a href="concerts.php">Concern</a></li>
                     <li><a href="sightseeing.php">Sightseeing</a></li>
                 </ul>
             </div>

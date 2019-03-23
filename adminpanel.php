@@ -76,20 +76,21 @@ ini_set('display_errors', 1);
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-md-0">
-                <div class="input-group input-group-md">
-                    <input type="text" class="form-control" aria-label="md" aria-describedby="inputGroup-sizing-md" placeholder="Search..." name="search">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-danger btn-md ml-6">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <a class="btn btn-danger btn-md ml-3" href="login.php"><i class="fa fa-user"></i>
-                   Login/Register
-                   
-                </a>
-            </form>
+           
+            <?php
+
+require_once 'dbconnect.php';
+
+
+$res=mysqli_query($connect, "SELECT * FROM users WHERE userId=1");
+$userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+
+?>
+    admin: <?php echo $userRow['userEmail']; ?>
+            
+           <a href="logout.php?logout" style="float:right;color:yellow">Sign Out</a>
+  
+
         </div>
     </div>
 </nav>
@@ -116,7 +117,7 @@ ini_set('display_errors', 1);
 <div class="container">
    
    <div class="row">
-  <div class="col-sm-6 col-lg-4">
+     <div class="col-sm-6 col-lg-4">
     <div class="thumbnail">
       <img src="img/karkskirche.jpg" alt="karlskirche" >
       <div class="caption">
@@ -131,17 +132,20 @@ ini_set('display_errors', 1);
                        "<h2>".$row['sName']. "</h2>"
                         ."<li style='margin-left:20px;'>".$row['address']."</li>"
                        ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li style='margin-left:20px;'>".$row['descript']."</li><br>"
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
-        
+       <a href="delete.php?sName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;" >Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
+
       </div>
     </div>
+
   </div>
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
@@ -159,18 +163,21 @@ ini_set('display_errors', 1);
                        "<h2>".$row['sName']. "</h2>"
                         ."<li style='margin-left:20px;'>".$row['address']."</li>"
                        ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li style='margin-left:20px;'>".$row['descript']."</li><br>"
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+            
            ?>
-        
+         <a href="delete.php?sName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
       </div>
     </div>
   </div>
+
+
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <img src="img/stannachurch.jpg" alt="st.Anna church" >
@@ -186,19 +193,23 @@ ini_set('display_errors', 1);
                        "<h2>".$row['sName']. "</h2>"
                         ."<li style='margin-left:20px;'>".$row['address']."</li>"
                        ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"."<br>"
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
+           
            ?>
+            <a href="delete.php?sName='.$row['sName'].'"class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
       </div>
     </div>
-  </div>
+    </div>
 </div><br><br>
-<div class="row">
+ 
+ <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
       <img src="img/shonbrunn.jpg" alt="shonbrunn">
@@ -214,15 +225,16 @@ ini_set('display_errors', 1);
                        "<h2>".$row['sName']. "</h2>"
                         ."<li style='margin-left:20px;'>".$row['address']."</li>"
                        ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li style='margin-left:20px;'>".$row['descript']."</li><br>"
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
-        
+             <a href="delete.php?sName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         
       </div>
     </div>
   </div>
@@ -242,47 +254,23 @@ ini_set('display_errors', 1);
                        ."<div class='list'>"
                         ."<li style='margin-left:20px;'>".$row['address']."</li>"
                        ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"."</div>"
+                        ."<li style='margin-left:20px;'>".$row['descript']."</li><br>"
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+            
            ?>
-        
+         <a href="delete.php?sName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
       </div>
     </div>
   </div>
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <img src="img/schloss.jpg" alt="schloss">
-      <div class="caption">
-       <?php
-     
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='schloss schonburn'";
-           $result = $connect->query($sql);
+  
+</div><br><br>
 
-           if($result->num_rows > 0) {
-               $row = $result->fetch_assoc();
-                   echo 
-                       "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
-                        
-                   ;
-               }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
-           ?>
-      </div>
-    </div>
-  </div>
-</div><br>
-
-  <!-- concerts beginns here-->
+  <!-- restaurants beginns here-->
   <nav  aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <h2>Some restaurants in Vienna.
@@ -307,14 +295,15 @@ ini_set('display_errors', 1);
                         ."<li >".$row['address']."</li>"
                        ."<li>".$row['descript']."</li>"
                         ."<li>".$row['tel']."</li>"
-                        ."<li>".$row['webaddress']."</li>"
+                        ."<li>".$row['webaddress']."</li><br>"
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
-
+ <a href="delete.php?rName='.$row['rName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
     </div>
   </div>
   <div class="card">
@@ -332,11 +321,15 @@ ini_set('display_errors', 1);
                         ."<li>".$row['address']."</li>"
                        ."<li>".$row['descript']."</li>"
                         ."<li>".$row['tel']."</li>"
-                        ."<li>".$row['webaddress']."</li>"
+                        ."<li>".$row['webaddress']."</li><br>"
                    ;
                }
            
            ?>
+            <a href="delete.php?rName='.$row['rName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
     </div>
   </div>
   <div class="card">
@@ -354,13 +347,15 @@ ini_set('display_errors', 1);
                         ."<li>".$row['address']."</li>"
                        ."<li>".$row['descript']."</li>"
                         ."<li>".$row['tel']."</li>"
-                        ."<li>".$row['webaddress']."</li>"
+                        ."<li>".$row['webaddress']."</li><br>"
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+            
            ?>
+            <a href="delete.php?rName='.$row['rName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
     </div>
   </div>
 </div><br>
@@ -387,10 +382,14 @@ ini_set('display_errors', 1);
                         ."<li>".$row['address']."</li>"
                        ."<li>".$row['event']."</li>"
                         ."<li>".$row['descript']."</li>"
-                        ."<li>".$row['preis']."</li>"
+                        ."<li>".$row['preis']."</li><br>"
                    ;
            }
            ?> 
+            <a href="delete.php?cName='.$row['cName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
@@ -409,10 +408,14 @@ ini_set('display_errors', 1);
                         ."<li>".$row['address']."</li>"
                        ."<li>".$row['event']."</li>"
                         ."<li>".$row['descript']."</li>"
-                        ."<li>".$row['preis']."</li>"
+                        ."<li>".$row['preis']."</li><br>"
                    ;
            }
            ?> 
+            <a href="delete.php?cName='.$row['cName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
@@ -431,22 +434,26 @@ ini_set('display_errors', 1);
                         ."<li>".$row['address']."</li>"
                        ."<li>".$row['event']."</li>"
                         ."<li>".$row['descript']."</li>"
-                        ."<li>".$row['preis']."</li>"
+                        ."<li>".$row['preis']."</li><br>"
                    ;
            }
            ?>
+            <a href="delete.php?cName='.$row['cName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+         <br><br>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
-</div>
 
 
-          </div><br>
+
+</div><br><br>
 
 
 
 <!-- Footer -->
-<footer class="text-light">
+ <footer class="text-light">
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-lg-4 col-xl-3">
@@ -468,16 +475,6 @@ ini_set('display_errors', 1);
                 </ul>
             </div>
 
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto">
-                <h5>Others links</h5>
-                <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
-                <ul class="list-unstyled">
-                    <li><a href="">Link 1</a></li>
-                    <li><a href="">Link 2</a></li>
-                    <li><a href="">Link 3</a></li>
-                    <li><a href="">Link 4</a></li>
-                </ul>
-            </div>
 
             <div class="col-md-4 col-lg-3 col-xl-3">
                 <h5>Contact</h5>
@@ -497,6 +494,9 @@ ini_set('display_errors', 1);
             </div>
         </div>
     </div>
+  
+
+    
 </footer>
 </body>
 </html>

@@ -1,0 +1,66 @@
+
+#jumbo{
+    background-image: url('img/london.jpg');
+    background-size: cover;
+    height: 400px;
+}
+.list{
+    padding-left: 10px;
+}
+ .col-lg-4,img{
+  height: 250px;
+  width: 348px;
+  border-radius: 5px;
+  
+}
+.thumbnail{
+    border: 1px solid lightgray;
+    margin-top: 10px;
+    -webkit-box-shadow: -4px 3px 5px -1px rgba(0,0,0,0.22);
+-moz-box-shadow: -4px 3px 5px -1px rgba(0,0,0,0.22);
+box-shadow: -4px 3px 5px -1px rgba(0,0,0,0.22);
+border-radius: 8px;
+}
+.thumbnail:hover{
+    box-shadow: 0 0 30px rgba(33,33,33,.2);
+}
+ .navbar,a {
+    background-color: #00d2d3;
+    color: white;
+    
+    font-family: 'Pavanam', sans-serif;
+     
+ }
+ 
+ h2{
+    color:#273c75;
+    font-family: 'Pavanam', sans-serif;
+    text-align:center;
+}
+h1{
+    font-family: 'Overpass Mono', monospace;
+}
+
+
+
+
+.product_rassurance .list-inline li:hover {
+    color: #00d2d3;
+}
+
+
+footer {
+    background: #00d2d3;
+    padding: 20px;
+    font-family: 'Pavanam', sans-serif;
+}
+footer a {
+    color: white!important
+}
+footer a:hover {
+     color: white;
+    background-color: #30336b;
+    cursor: p
+   
+}
+

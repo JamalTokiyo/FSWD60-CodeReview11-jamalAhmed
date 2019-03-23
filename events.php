@@ -1,41 +1,5 @@
 
-<?php
 
-
-require_once "dbconnect.php";
-
-  error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-  if(isset($_POST['search'])) {
-    $search = $_POST['search'];
-    $search = preg_replace("#[^0-9a-z]i#","", $search);
-    $res=mysqli_query($connect, "SELECT * FROM restaurant WHERE rName LIKE '%".$search."%'");
-  $row=mysqli_fetch_array($res, MYSQLI_ASSOC);
-  $count = mysqli_num_rows($res);
-
-   
-    
-    if($count == 0){
-      $output = "There was no search results!";
-
-    }else{
-
-      while ($row = mysqli_fetch_array($res)) {
-
-        $rname = $row ['rName'];
-        $address = $row ['address'];
-        $tel = $row ['tel'];
-         
-
-       $count.= '<div> '.$rname.' '.$address.''.$tel.'</div>';
-
-      }
-
-    }
-  }
-
-  ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,13 +26,13 @@ ini_set('display_errors', 1);
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav m-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="sightseeing.php">Sightseeing <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="events.php">Concerts</a>
+                    <a class="nav-link" href="events.php">Events</a>
                 </li>
                 
                 <li class="nav-item active">
@@ -76,20 +40,7 @@ ini_set('display_errors', 1);
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-md-0">
-                <div class="input-group input-group-md">
-                    <input type="text" class="form-control" aria-label="md" aria-describedby="inputGroup-sizing-md" placeholder="Search..." name="search">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-danger btn-md ml-6">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <a class="btn btn-danger btn-md ml-3" href="login.php"><i class="fa fa-user"></i>
-                   Login/Register
-                   
-                </a>
-            </form>
+           
         </div>
     </div>
 </nav>
@@ -121,7 +72,7 @@ ini_set('display_errors', 1);
       <img src="img/karkskirche.jpg" alt="karlskirche" >
       <div class="caption">
          <?php
-     
+                     require_once 'dbconnect.php';
            $sql = "SELECT * FROM `sightseeing` WHERE sName='St. Charles Church'";
            $result = $connect->query($sql);
 
@@ -129,9 +80,9 @@ ini_set('display_errors', 1);
                $row = $result->fetch_assoc();
                    echo 
                        "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li>".$row['address']."</li>"
+                       ."<li>".$row['type']."</li>"
+                        ."<li>".$row['descript']."</li>"
                         
                    ;
                }
@@ -157,9 +108,9 @@ ini_set('display_errors', 1);
                $row = $result->fetch_assoc();
                    echo 
                        "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li>".$row['address']."</li>"
+                       ."<li>".$row['type']."</li>"
+                        ."<li>".$row['descript']."</li>"
                         
                    ;
                }
@@ -184,9 +135,9 @@ ini_set('display_errors', 1);
                $row = $result->fetch_assoc();
                    echo 
                        "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li>".$row['address']."</li>"
+                       ."<li>".$row['type']."</li>"
+                        ."<li>".$row['descript']."</li>"
                         
                    ;
                }
@@ -212,9 +163,9 @@ ini_set('display_errors', 1);
                $row = $result->fetch_assoc();
                    echo 
                        "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li>".$row['address']."</li>"
+                       ."<li>".$row['type']."</li>"
+                        ."<li>".$row['descript']."</li>"
                         
                    ;
                }
@@ -232,17 +183,16 @@ ini_set('display_errors', 1);
       <div class="caption">
        <?php
      
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='segway'";
+           $sql = "SELECT * FROM `sightseeing` WHERE sName='St.Anna church'";
            $result = $connect->query($sql);
 
            if($result->num_rows > 0) {
                $row = $result->fetch_assoc();
                    echo 
                        "<h2>".$row['sName']. "</h2>"
-                       ."<div class='list'>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"."</div>"
+                        ."<li>".$row['address']."</li>"
+                       ."<li>".$row['type']."</li>"
+                        ."<li>".$row['descript']."</li>"
                         
                    ;
                }
@@ -260,16 +210,16 @@ ini_set('display_errors', 1);
       <div class="caption">
        <?php
      
-           $sql = "SELECT * FROM `sightseeing` WHERE sName='schloss schonburn'";
+           $sql = "SELECT * FROM `sightseeing` WHERE sName='St.Anna church'";
            $result = $connect->query($sql);
 
            if($result->num_rows > 0) {
                $row = $result->fetch_assoc();
                    echo 
                        "<h2>".$row['sName']. "</h2>"
-                        ."<li style='margin-left:20px;'>".$row['address']."</li>"
-                       ."<li style='margin-left:20px;'>".$row['type']."</li>"
-                        ."<li style='margin-left:20px;'>".$row['descript']."</li>"
+                        ."<li>".$row['address']."</li>"
+                       ."<li>".$row['type']."</li>"
+                        ."<li>".$row['descript']."</li>"
                         
                    ;
                }
@@ -304,7 +254,7 @@ ini_set('display_errors', 1);
                $row = $result->fetch_assoc();
                    echo 
                        "<h3>".$row['rName']. "</h3>"
-                        ."<li >".$row['address']."</li>"
+                        ."<li>".$row['address']."</li>"
                        ."<li>".$row['descript']."</li>"
                         ."<li>".$row['tel']."</li>"
                         ."<li>".$row['webaddress']."</li>"
@@ -462,9 +412,9 @@ ini_set('display_errors', 1);
                 <hr class="bg-white mb-2 mt-0 d-inline-block mx-auto w-25">
                 <ul class="list-unstyled">
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="restaurents.php">Restaurant</a></li>
-                    <li><a href="events.php">Concern</a></li>
-                    <li><a href="sightseeing.php">Sightseeing</a></li>
+                    <li><a href="">Restaurant</a></li>
+                    <li><a href="">Concern</a></li>
+                    <li><a href="">Sightseeing</a></li>
                 </ul>
             </div>
 

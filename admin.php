@@ -76,20 +76,21 @@ ini_set('display_errors', 1);
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-md-0">
-                <div class="input-group input-group-md">
-                    <input type="text" class="form-control" aria-label="md" aria-describedby="inputGroup-sizing-md" placeholder="Search..." name="search">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-danger btn-md ml-6">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <a class="btn btn-danger btn-md ml-3" href="login.php"><i class="fa fa-user"></i>
-                   Login/Register
-                   
-                </a>
-            </form>
+            
+
+            <?php
+
+require_once 'dbconnect.php';
+
+
+$res=mysqli_query($connect, "SELECT * FROM users WHERE userId=1");
+$userRow=mysqli_fetch_array($res, MYSQLI_ASSOC);
+
+?>
+    admin: <?php echo $userRow['userEmail']; ?>
+            
+           <a href="logout.php?logout" style="float:right;color:yellow">Sign Out</a>
+  
         </div>
     </div>
 </nav>
@@ -135,10 +136,12 @@ ini_set('display_errors', 1);
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+            
            ?>
+            <a href="delete.php?rName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+          <br><br>
         
       </div>
     </div>
@@ -163,11 +166,12 @@ ini_set('display_errors', 1);
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
-        
+               <a href="delete.php?rName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+          <br><br>
       </div>
     </div>
   </div>
@@ -190,10 +194,12 @@ ini_set('display_errors', 1);
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
+            <a href="delete.php?rName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+          <br><br>
       </div>
     </div>
   </div>
@@ -218,11 +224,11 @@ ini_set('display_errors', 1);
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
-        
+         <a href="delete.php?rName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
       </div>
     </div>
   </div>
@@ -246,11 +252,11 @@ ini_set('display_errors', 1);
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
-        
+         <a href="delete.php?rName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
       </div>
     </div>
   </div>
@@ -273,10 +279,11 @@ ini_set('display_errors', 1);
                         
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
+            <a href="delete.php?rName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
       </div>
     </div>
   </div>
@@ -310,11 +317,12 @@ ini_set('display_errors', 1);
                         ."<li>".$row['webaddress']."</li>"
                    ;
                }
-            else {
-               echo "<h2>No Data Avaliable</h2>";
-           }
+           
            ?>
-
+ <a href="delete.php?rName='.$row['sName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
+          <br><br>
     </div>
   </div>
   <div class="card">
@@ -337,6 +345,9 @@ ini_set('display_errors', 1);
                }
            
            ?>
+            <a href="delete.php?rName='.$row['rName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
     </div>
   </div>
   <div class="card">
@@ -361,6 +372,9 @@ ini_set('display_errors', 1);
                echo "<h2>No Data Avaliable</h2>";
            }
            ?>
+            <a href="delete.php?rName='.$row['rName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
     </div>
   </div>
 </div><br>
@@ -391,6 +405,9 @@ ini_set('display_errors', 1);
                    ;
            }
            ?> 
+            <a href="delete.php?rName='.$row['cName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
@@ -413,6 +430,9 @@ ini_set('display_errors', 1);
                    ;
            }
            ?> 
+            <a href="delete.php?rName='.$row['cName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
@@ -435,6 +455,9 @@ ini_set('display_errors', 1);
                    ;
            }
            ?>
+            <a href="delete.php?rName='.$row['cName'].'" class="btn btn-danger" style="margin-left:20px;">Delete</a>
+         <a href="#" class="btn btn-warning" style="margin-left:20px;">update</a>
+          <a href="#" class="btn btn-info" style="margin-left:20px;">Create</a>
       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
     </div>
   </div>
